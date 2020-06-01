@@ -10,8 +10,8 @@ var start;
 var passBubble1 = false;
 //Styles
 var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
-var styleDino = "height: 150px; position: absolute; left: 30px; top: 30%;";
-var styleDinoStop = "height: 150px; position: absolute; left: -130px; top: 30%;";
+var styleDino = "height: 300px; position: absolute; left: 50%; top: 30%;";
+var styleDinoStop = "height: 300px; position: absolute; left: -130px; top: 30%;";
 var styleCounterMeter = "width: 115px; position: absolute; left: 20px; top: 0px;";
 var styleCounterEnergy = "width: 115px; position: absolute; left: 515px; top: 0px;";
 var styleCounterMeterImg = "width: 115px; position: absolute; left: 5px; top: 5px;";
@@ -31,33 +31,31 @@ var styleMessage = "position: inherit; opacity: 0; animation: hide 1s linear;";
 
 //Conten slide 1
 var srcBackground = "images/bg-1.png";
-var srcTextFirstSlide = "images/new-game.png";
-var srcLogoRastishka = "images/icons.png";
-var srcLogoRastishka2 = "images/logo-big.png";
-//var srcIconApp = "images/icon-app.png";
-//var srcIconsMarkets = "images/icon-stores.png";
+var srcTextNewGame = "images/text-new-game.png";
+var srcLogoRastishka = "images/icon.png";
+var srcLogoBig = "images/logo-big.png";
 
 //Conten slide 3
 var srcTextSecondSlide = "images/slide-2-text.png";
 var srcBtnSecondSlide = "images/slide-2-btn.png";
 
 var DOM_Background = document.createElement("img");
-var DOM_TextFirstSlide = document.createElement("img");
+var DOM_TextNewGame = document.createElement("img");
 var DOM_TextSecondSlide = document.createElement("img");
 var DOM_BtnSecondSlide = document.createElement("img");
 var DOM_LogoRastishka = document.createElement("img");
-var DOM_LogoRastishka2 = document.createElement("img");
+var DOM_LogoBig = document.createElement("img");
 var DOM_IconApp = document.createElement("img");
 var DOM_IconsMarkets = document.createElement("img");
 var startTimerslideOne;
 
 
 //Content slide 2
-var srcDino = "images/dinosize2.gif";
+var srcDino = "images/dino.png";
 var srcDinoStop = "images/dinosize2.png";
 var DOM_Dino = document.createElement("img");
 var DOM_Dino_Stop = document.createElement("img");
-var srcGameLayer1 = "images/game-layer-1.png";
+var srcGameLayer1 = "images/bg-2.png";
 var srcGameLayer2 = "images/game-layer-2.png";
 var srcGameLayer3 = "images/game-layer-3.png";
 var srcGameLayer4 = "images/game-layer-4.png";
@@ -161,15 +159,15 @@ function startSlideOne() {
 	DOM_Background.style.cssText = styleBanner;
 
 
-	DOM_TextFirstSlide.src = srcTextFirstSlide;
-	DOM_TextFirstSlide.style.cssText = styleBanner;
+	DOM_TextNewGame.src = srcTextNewGame;
+	DOM_TextNewGame.style.cssText = styleBanner;
 
 
 	DOM_LogoRastishka.src = srcLogoRastishka;
 	DOM_LogoRastishka.style.cssText = styleBanner;
 
-    DOM_LogoRastishka2.src = srcLogoRastishka2;
-	DOM_LogoRastishka2.style.cssText = styleBanner;
+    DOM_LogoBig.src = srcLogoBig;
+	DOM_LogoBig.style.cssText = styleBanner;
 
 	//DOM_IconApp.src = srcIconApp;
 	//DOM_IconApp.style.cssText = styleBanner;
@@ -178,9 +176,9 @@ function startSlideOne() {
 	//DOM_IconsMarkets.style.cssText = styleBanner;
 
 	DOM_mainContainer.appendChild(DOM_Background);
-	DOM_mainContainer.appendChild(DOM_TextFirstSlide);
+	DOM_mainContainer.appendChild(DOM_TextNewGame);
 	DOM_mainContainer.appendChild(DOM_LogoRastishka);
-	DOM_mainContainer.appendChild(DOM_LogoRastishka2);
+	DOM_mainContainer.appendChild(DOM_LogoBig);
 	//DOM_mainContainer.appendChild(DOM_IconsMarkets);
 
 	startTimerslideOne = setTimeout(endSlideOne, 3000);
@@ -191,7 +189,7 @@ function endSlideOne() {
 	clearTimeout(startTimerslideOne);
 	console.log("endSlideOne");
 	DOM_mainContainer.removeChild(DOM_Background);
-	DOM_mainContainer.removeChild(DOM_TextFirstSlide);
+	DOM_mainContainer.removeChild(DOM_TextNewGame);
 	DOM_mainContainer.removeChild(DOM_LogoRastishka);
 	//DOM_mainContainer.removeChild(DOM_IconApp);
 	//DOM_mainContainer.removeChild(DOM_IconsMarkets);
@@ -334,8 +332,8 @@ function startSlideThree() {
 	DOM_BtnSecondSlide.src = srcBtnSecondSlide;
 	DOM_BtnSecondSlide.style.cssText = styleBanner;
 
-    DOM_LogoRastishka2.src = srcLogoRastishka2;
-	DOM_LogoRastishka2.style.cssText = "width: 325px; height: 125px; position: absolute; left: 225px;top: 0px;";
+    DOM_LogoBig.src = srcLogoBig;
+	DOM_LogoBig.style.cssText = "width: 325px; height: 125px; position: absolute; left: 225px;top: 0px;";
 	
 	/*DOM_IconApp.src = srcIconApp;
 	DOM_IconApp.style.cssText = styleBanner;
@@ -345,7 +343,7 @@ function startSlideThree() {
 	DOM_mainContainer.appendChild(DOM_Background);
 	DOM_mainContainer.appendChild(DOM_TextSecondSlide);
 	DOM_mainContainer.appendChild(DOM_BtnSecondSlide);
-    DOM_mainContainer.appendChild(DOM_LogoRastishka2);
+    DOM_mainContainer.appendChild(DOM_LogoBig);
 	//DOM_mainContainer.appendChild(DOM_IconApp);
 	//DOM_mainContainer.appendChild(DOM_IconsMarkets);
 	startAnime3();
@@ -393,13 +391,13 @@ var DOM_IconApp_Position = {
 	}
 };
 
-var DOM_TextFirstSlide_Position = {
+var DOM_TextNewGame_Position = {
 	posY: 600,
 	speedY: 15,
 	opacity: 0,
 	update: function () {
-		DOM_TextFirstSlide.style.top = this.posY + "px";
-		DOM_TextFirstSlide.style.opacity = this.opacity;
+		DOM_TextNewGame.style.top = this.posY + "px";
+		DOM_TextNewGame.style.opacity = this.opacity;
 	}
 }
 
@@ -434,11 +432,11 @@ function tick() {
 	if (DOM_IconApp_Position.opacity >= 1) DOM_IconApp_Position.opacity = 1;
 	DOM_IconApp_Position.update();
 
-	DOM_TextFirstSlide_Position.posY -= DOM_TextFirstSlide_Position.speedY;
-	DOM_TextFirstSlide_Position.opacity += 0.017;
-	if (DOM_TextFirstSlide_Position.posY <= 0) DOM_TextFirstSlide_Position.posY = 0;
-	if (DOM_TextFirstSlide_Position.opacity >= 1) DOM_TextFirstSlide_Position.opacity = 1;
-	DOM_TextFirstSlide_Position.update();
+	DOM_TextNewGame_Position.posY -= DOM_TextNewGame_Position.speedY;
+	DOM_TextNewGame_Position.opacity += 0.017;
+	if (DOM_TextNewGame_Position.posY <= 0) DOM_TextNewGame_Position.posY = 0;
+	if (DOM_TextNewGame_Position.opacity >= 1) DOM_TextNewGame_Position.opacity = 1;
+	DOM_TextNewGame_Position.update();
 
 	RAF(tick);
 }
