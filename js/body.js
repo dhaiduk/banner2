@@ -206,20 +206,17 @@ function startSlideTwo() {
 	DOM_mainContainer.appendChild(DOM_GameLayer1);
 	DOM_mainContainer.appendChild(DOM_GameLayer2);
 	DOM_mainContainer.appendChild(DOM_GameLayer3);
-	//DOM_mainContainer.appendChild(DOM_GameLayer4);
-	//DOM_mainContainer.appendChild(DOM_GameLayer5);
+	DOM_mainContainer.appendChild(DOM_Dino);
+	DOM_mainContainer.appendChild(DOM_Dino_Stop);
+	DOM_mainContainer.appendChild(DOM_Bubble1);
+	DOM_mainContainer.appendChild(DOM_Bubble2);
+	DOM_mainContainer.appendChild(DOM_Bubble3);
+	DOM_mainContainer.appendChild(DOM_Bubble4);
 	DOM_mainContainer.appendChild(DOM_CounterMeterImg);
 	DOM_mainContainer.appendChild(DOM_CounterMeter);
 	DOM_mainContainer.appendChild(DOM_CounterEnergyImg);
 	DOM_mainContainer.appendChild(DOM_CounterEnergyFull);
 	DOM_mainContainer.appendChild(DOM_CounterEnergy);
-	DOM_mainContainer.appendChild(DOM_Dino);
-	DOM_mainContainer.appendChild(DOM_Dino_Stop);
-	//DOM_mainContainer.appendChild(DOM_GameLayer6);
-	DOM_mainContainer.appendChild(DOM_Bubble1);
-	DOM_mainContainer.appendChild(DOM_Bubble2);
-	DOM_mainContainer.appendChild(DOM_Bubble3);
-	DOM_mainContainer.appendChild(DOM_Bubble4);
 
 	initGameSlide2();
 }
@@ -234,7 +231,7 @@ function initGameSlide2() {
 		timePassedGo = timePassedGoBufer + (1.5 * (Date.now() - start) / 1000);
 		DOM_GameMetersCount.innerText = timePassed + "m";
 		DOM_GameEnergyCount.innerText = Math.round((15 - timePassedGo) * 6) + "%";
-		DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((15 - timePassedGo) * 6 / 100)) + "px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
+		DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((15 - timePassedGo) * 6 / 100)) + "px; height:51px; position: absolute; left: 180px; top: 5px; overflow: hidden;";
 		// Условие, если проценты меньше 0 то показываем финишный слайд.
 		//DOM_GameMetersCount.innerText = "150m";
 		if ((15 - timePassedGo) < 1) endSlideTwo();
