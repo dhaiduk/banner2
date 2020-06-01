@@ -1,5 +1,9 @@
+"use strict";
+
 var count;
 var timer;
+var startTimerslideOne,timePassedGo ;
+
 //Get main container banner
 var DOM_mainContainer = document.getElementById("container");
 var WIDTH_MAIN = DOM_mainContainer.offsetWidth;
@@ -8,15 +12,17 @@ var timePassedBufer = 0, timePassedGoBufer = 0;
 var timePassed, timePassedGO;
 var start;
 var passBubble1 = false;
+
 //Styles
 var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
-var styleDino = "height: 300px; position: absolute; left: 50%; top: 30%;";
-var styleDinoStop = "height: 300px; position: absolute; left: -130px; top: 30%;";
-var styleCounterMeter = "width: 115px; position: absolute; left: 20px; top: 0px;";
-var styleCounterEnergy = "width: 115px; position: absolute; left: 515px; top: 0px;";
-var styleCounterMeterImg = "width: 115px; position: absolute; left: 5px; top: 5px;";
-var styleCounterEnergyImg = "width: 115px; position: absolute; left: 530px; top: 5px;";
-var styleCounterEnergyFull = "width: 80px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
+
+var styleDino = "height: ${HEIGHT_MAIN}*0.5; position: absolute; left: 50%; top: 30%;";
+var styleDinoStop = "height: 300px; position: absolute; left: 50%; top: 30%;";
+var styleCounterMeter = "width: 115px; position: absolute; left: 5%; top: 0px;";
+var styleCounterEnergy = "width: 115px; position: absolute; left: 55%; top: 0px;";
+var styleCounterMeterImg = "width: 115px; position: absolute; left: 5%; top: 5px;";
+var styleCounterEnergyImg = "width: 115px; position: absolute; left: 55%; top: 5px;";
+var styleCounterEnergyFull = "width: 80px; height:51px; position: absolute; left: 55%; top: 5px; overflow: hidden;";
 var styleCounterEnergyImgFull = "width: 115px; margin: 0px 0px 0px 0px; position: absolute; left: 0px; top: 0px;";
 var styleGameTableMeters = "width: 70px; position: absolute; top: 70%;";
 var styleBubble1 = "position: absolute; top: 100px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px 0px; width: 125px; height: 125px;  animation: animatedBubble1 5s linear;";
@@ -28,39 +34,16 @@ var styleCursorPress = "position: absolute; left: 430px; top: 150px; overflow: h
 var styleCursorText = "position: absolute; left: 400px; top: 70px; overflow: hidden; opacity: 1; -webkit-animation: pulsing2 2s infinite;  animation: pulsing2 2s infinite;";
 var styleMessage = "position: inherit; opacity: 0; animation: hide 1s linear;";
 
-
 //Conten slide 1
 var srcBackground = "images/bg-1.png";
 var srcTextNewGame = "images/text-new-game.png";
-var srcLogoRastishka = "images/icon.png";
+var srcIcon = "images/icon.png";
 var srcLogoBig = "images/logo-big.png";
-
-//Conten slide 3
-var srcTextSecondSlide = "images/slide-2-text.png";
-var srcBtnSecondSlide = "images/slide-2-btn.png";
-
-var DOM_Background = document.createElement("img");
-var DOM_TextNewGame = document.createElement("img");
-var DOM_TextSecondSlide = document.createElement("img");
-var DOM_BtnSecondSlide = document.createElement("img");
-var DOM_LogoRastishka = document.createElement("img");
-var DOM_LogoBig = document.createElement("img");
-var DOM_IconApp = document.createElement("img");
-var DOM_IconsMarkets = document.createElement("img");
-var startTimerslideOne;
-
 
 //Content slide 2
 var srcDino = "images/dino.png";
-var srcDinoStop = "images/dinosize2.png";
-var DOM_Dino = document.createElement("img");
-var DOM_Dino_Stop = document.createElement("img");
-var srcGameLayer1 = "images/bg-2.png";
-var srcGameLayer2 = "images/game-layer-2.png";
-var srcGameLayer3 = "images/game-layer-3.png";
-var srcGameLayer4 = "images/game-layer-4.png";
-var srcGameLayer5 = "images/game-layer-5.png";
-var srcGameLayer6 = "images/game-layer-6.png";
+var srcDinoStop = "images/dino.png";
+var srcBgTwo = "images/bg-2.png";
 var srcCounterMeter = "images/counter-meters.png";
 var srcCounterEnergy = "images/counter-energy-100.png";
 var srcCounterEnergyFull = "images/counter-energy-0.png";
@@ -72,12 +55,24 @@ var srcMessageM = "images/m.png";
 var srcMessageS = "images/s.png";
 var srcMessageC = "images/c.png";
 
-var DOM_GameLayer1 = document.createElement("img");
-var DOM_GameLayer2 = document.createElement("div");
-var DOM_GameLayer3 = document.createElement("div");
-var DOM_GameLayer4 = document.createElement("div");
-var DOM_GameLayer5 = document.createElement("div");
-var DOM_GameLayer6 = document.createElement("div");
+//Conten slide 3
+var srcTextSecondSlide = "images/slide-2-text.png";
+var srcBtnSecondSlide = "images/slide-2-btn.png";
+
+//Slide1 create DOM Elements
+var DOM_Background = document.createElement("img");
+var DOM_TextNewGame = document.createElement("img");
+var DOM_Icon = document.createElement("img");
+var DOM_LogoBig = document.createElement("img");
+
+
+//Slide2
+var DOM_BtnSecondSlide = document.createElement("img");
+var DOM_Dino = document.createElement("img");
+var DOM_Dino_Stop = document.createElement("img");
+var DOM_BgTwo = document.createElement("img");
+var DOM_Clouds1 = document.createElement("div");
+var DOM_Clouds2 = document.createElement("div");
 var DOM_GameMetersCount = document.createElement("p");
 var DOM_GameEnergyCount = document.createElement("p");
 var DOM_Bubble1 = document.createElement("div");
@@ -88,12 +83,10 @@ var DOM_cursor = document.createElement("img");
 var DOM_cursor_press = document.createElement("img");
 var DOM_cursor_text = document.createElement("img");
 
-
 var DOM_messageC = document.createElement("img");
 var DOM_messageM = document.createElement("img");
 var DOM_messageS = document.createElement("img");
 var DOM_messageSk = document.createElement("img");
-
 
 //Counters
 var DOM_CounterMeter = document.createElement("div");
@@ -109,14 +102,10 @@ DOM_Dino.style.cssText = styleDino;
 DOM_Dino_Stop.src = srcDinoStop;
 DOM_Dino_Stop.style.cssText = styleDinoStop;
 
-DOM_GameLayer1.src = srcGameLayer1;
-DOM_GameLayer1.style.cssText = styleBanner;
-DOM_GameLayer2.id = "animatedBackground2";
-DOM_GameLayer3.id = "animatedBackground3";
-DOM_GameLayer4.id = "animatedBackground4";
-DOM_GameLayer5.id = "animatedBackground5";
-DOM_GameLayer6.id = "animatedBackground6";
-
+DOM_BgTwo.src = srcBgTwo;
+DOM_BgTwo.style.cssText = styleBanner;
+DOM_Clouds1.id = "animatedBackground2";
+DOM_Clouds2.id = "animatedBackground3";
 DOM_CounterMeter.style.cssText = styleCounterMeter;
 DOM_CounterMeter.appendChild(DOM_GameMetersCount);
 DOM_CounterMeterImg.src = srcCounterMeter;
@@ -152,58 +141,51 @@ DOM_cursor_press.src = srcCursorPress;
 DOM_cursor_press.style.cssText = styleCursorPress;
 DOM_cursor_text.src = srcCursorText;
 DOM_cursor_text.style.cssText = styleCursorText;
+
+//Slide3 create DOM Elements
+var DOM_TextSecondSlide = document.createElement("img");
+
+
 //Start Slide One
 function startSlideOne() {
 
 	DOM_Background.src = srcBackground;
 	DOM_Background.style.cssText = styleBanner;
 
-
 	DOM_TextNewGame.src = srcTextNewGame;
 	DOM_TextNewGame.style.cssText = styleBanner;
 
+	DOM_Icon.src = srcIcon;
+	DOM_Icon.style.cssText = styleBanner;
 
-	DOM_LogoRastishka.src = srcLogoRastishka;
-	DOM_LogoRastishka.style.cssText = styleBanner;
-
-    DOM_LogoBig.src = srcLogoBig;
+	DOM_LogoBig.src = srcLogoBig;
 	DOM_LogoBig.style.cssText = styleBanner;
-
-	//DOM_IconApp.src = srcIconApp;
-	//DOM_IconApp.style.cssText = styleBanner;
-
-	//DOM_IconsMarkets.src = srcIconsMarkets;
-	//DOM_IconsMarkets.style.cssText = styleBanner;
 
 	DOM_mainContainer.appendChild(DOM_Background);
 	DOM_mainContainer.appendChild(DOM_TextNewGame);
-	DOM_mainContainer.appendChild(DOM_LogoRastishka);
+	DOM_mainContainer.appendChild(DOM_Icon);
 	DOM_mainContainer.appendChild(DOM_LogoBig);
-	//DOM_mainContainer.appendChild(DOM_IconsMarkets);
 
 	startTimerslideOne = setTimeout(endSlideOne, 3000);
-
 };
 //End First Slide
+
+
 function endSlideOne() {
 	clearTimeout(startTimerslideOne);
 	console.log("endSlideOne");
 	DOM_mainContainer.removeChild(DOM_Background);
 	DOM_mainContainer.removeChild(DOM_TextNewGame);
-	DOM_mainContainer.removeChild(DOM_LogoRastishka);
-	//DOM_mainContainer.removeChild(DOM_IconApp);
-	//DOM_mainContainer.removeChild(DOM_IconsMarkets);
+	DOM_mainContainer.removeChild(DOM_Icon);
+	DOM_mainContainer.removeChild(DOM_LogoBig);
 	startSlideTwo();
 };
 
 //Start Slide Two
 function startSlideTwo() {
 	count = 0;
-	DOM_mainContainer.appendChild(DOM_GameLayer1);
-	DOM_mainContainer.appendChild(DOM_GameLayer2);
-	DOM_mainContainer.appendChild(DOM_GameLayer3);
-	DOM_mainContainer.appendChild(DOM_GameLayer4);
-	DOM_mainContainer.appendChild(DOM_GameLayer5);
+	DOM_mainContainer.appendChild(DOM_BgTwo);
+	DOM_mainContainer.appendChild(DOM_Clouds1);
 	DOM_mainContainer.appendChild(DOM_CounterMeterImg);
 	DOM_mainContainer.appendChild(DOM_CounterMeter);
 	DOM_mainContainer.appendChild(DOM_CounterEnergyImg);
@@ -211,12 +193,12 @@ function startSlideTwo() {
 	DOM_mainContainer.appendChild(DOM_CounterEnergy);
 	DOM_mainContainer.appendChild(DOM_Dino);
 	DOM_mainContainer.appendChild(DOM_Dino_Stop);
-	DOM_mainContainer.appendChild(DOM_GameLayer6);
+	//DOM_mainContainer.appendChild(DOM_GameLayer6);
 	DOM_mainContainer.appendChild(DOM_Bubble1);
 	DOM_mainContainer.appendChild(DOM_Bubble2);
 	DOM_mainContainer.appendChild(DOM_Bubble3);
 	DOM_mainContainer.appendChild(DOM_Bubble4);
-	
+
 
 	namePlaceMove();
 }
@@ -229,24 +211,24 @@ function PauseSlide2() {
 	DOM_mainContainer.appendChild(DOM_cursor_text);
 	timePassedBufer = timePassed;
 	timePassedGoBufer = timePassedGo;
-	DOM_GameLayer1.style.animationPlayState = "paused";
-	DOM_GameLayer2.style.animationPlayState = "paused";
-	DOM_GameLayer3.style.animationPlayState = "paused";
-	DOM_GameLayer4.style.animationPlayState = "paused";
+	DOM_BgTwo.style.animationPlayState = "paused";
+	DOM_Clouds1.style.animationPlayState = "paused";
+	DOM_Clouds2.style.animationPlayState = "paused";
+	/*DOM_GameLayer4.style.animationPlayState = "paused";
 	DOM_GameLayer5.style.animationPlayState = "paused";
-	DOM_GameLayer6.style.animationPlayState = "paused";
+	DOM_GameLayer6.style.animationPlayState = "paused";*/
 	DOM_Bubble1.style.animationPlayState = "paused";
 	DOM_Bubble2.style.animationPlayState = "paused";
 	DOM_Bubble3.style.animationPlayState = "paused";
 	DOM_Bubble4.style.animationPlayState = "paused";
-    DOM_Dino.style.cssText = "height: 150px; position: absolute; left: -130px; top: 30%;";;
-    DOM_Dino_Stop.style.cssText = "height: 150px; position: absolute; left: 30px; top: 30%;";
+	DOM_Dino.style.cssText = "height: 150px; position: absolute; left: -130px; top: 30%;";;
+	DOM_Dino_Stop.style.cssText = "height: 150px; position: absolute; left: 30px; top: 30%;";
 	clearInterval(timer);
 	DOM_Bubble1.addEventListener("mousedown", () => { СontinuationSlide2(); });
 	DOM_cursor.addEventListener("mousedown", () => { СontinuationSlide2(); });
 	DOM_cursor_press.addEventListener("mousedown", () => { СontinuationSlide2(); });
 	DOM_cursor_text.addEventListener("mousedown", () => { СontinuationSlide2(); });
-	
+
 	DOM_Bubble1.addEventListener("touchstart", () => { СontinuationSlide2(); });
 	DOM_cursor.addEventListener("touchstart", () => { СontinuationSlide2(); });
 	DOM_cursor_press.addEventListener("touchstart", () => { СontinuationSlide2(); });
@@ -257,9 +239,9 @@ function PauseSlide2() {
 function СontinuationSlide2() {
 	//namePlaceMove();
 	passBubble1 = true;
-	DOM_GameLayer1.style.animationPlayState = "running";
-	DOM_GameLayer2.style.animationPlayState = "running";
-	DOM_GameLayer3.style.animationPlayState = "running";
+	DOM_BgTwo.style.animationPlayState = "running";
+	DOM_Clouds1.style.animationPlayState = "running";
+	DOM_Clouds2.style.animationPlayState = "running";
 	DOM_GameLayer4.style.animationPlayState = "running";
 	DOM_GameLayer5.style.animationPlayState = "running";
 	DOM_GameLayer6.style.animationPlayState = "running";
@@ -272,9 +254,9 @@ function СontinuationSlide2() {
 	DOM_Bubble2.style.animationPlayState = "running";
 	DOM_Bubble3.style.animationPlayState = "running";
 	DOM_Bubble4.style.animationPlayState = "running";
-    DOM_Dino.style.cssText = "height: 150px; position: absolute; left: 30px; top: 30%;";;
-    DOM_Dino_Stop.style.cssText = "height: 150px; position: absolute; left: -130px; top: 30%;";
-    
+	DOM_Dino.style.cssText = "height: 150px; position: absolute; left: 30px; top: 30%;";;
+	DOM_Dino_Stop.style.cssText = "height: 150px; position: absolute; left: -130px; top: 30%;";
+
 	DOM_Bubble2.addEventListener("mousedown", () => {
 		DOM_Bubble2.style.backgroundImage = "none";
 		DOM_Bubble2.appendChild(DOM_messageM)
@@ -287,7 +269,7 @@ function СontinuationSlide2() {
 		DOM_Bubble4.style.backgroundImage = "none";
 		DOM_Bubble4.appendChild(DOM_messageC)
 	});
-	
+
 	DOM_Bubble2.addEventListener("touchstart", () => {
 		DOM_Bubble2.style.backgroundImage = "none";
 		DOM_Bubble2.appendChild(DOM_messageM)
@@ -300,16 +282,16 @@ function СontinuationSlide2() {
 		DOM_Bubble4.style.backgroundImage = "none";
 		DOM_Bubble4.appendChild(DOM_messageC)
 	});
-	
+
 	namePlaceMove();
 };
 //End First Slide
 function endSlideTwo() {
-	DOM_mainContainer.removeChild(DOM_GameLayer1);
-	DOM_mainContainer.removeChild(DOM_GameLayer2);
-	DOM_mainContainer.removeChild(DOM_GameLayer3);
-	DOM_mainContainer.removeChild(DOM_GameLayer4);
-	DOM_mainContainer.removeChild(DOM_GameLayer5);
+	DOM_mainContainer.removeChild(DOM_BgTwo);
+	DOM_mainContainer.removeChild(DOM_Clouds1);
+	DOM_mainContainer.removeChild(DOM_Clouds2);
+	/*DOM_mainContainer.removeChild(DOM_GameLayer4);
+	DOM_mainContainer.removeChild(DOM_GameLayer5);*/
 	DOM_mainContainer.removeChild(DOM_CounterMeterImg);
 	DOM_mainContainer.removeChild(DOM_CounterMeter);
 	DOM_mainContainer.removeChild(DOM_CounterEnergyImg);
@@ -317,7 +299,8 @@ function endSlideTwo() {
 	DOM_mainContainer.removeChild(DOM_CounterEnergy);
 	DOM_mainContainer.removeChild(DOM_Dino);
 	DOM_mainContainer.removeChild(DOM_Dino_Stop);
-	DOM_mainContainer.removeChild(DOM_GameLayer6);
+
+	//DOM_mainContainer.removeChild(DOM_GameLayer6);
 	startSlideThree();
 };
 
@@ -332,26 +315,19 @@ function startSlideThree() {
 	DOM_BtnSecondSlide.src = srcBtnSecondSlide;
 	DOM_BtnSecondSlide.style.cssText = styleBanner;
 
-    DOM_LogoBig.src = srcLogoBig;
+	DOM_LogoBig.src = srcLogoBig;
 	DOM_LogoBig.style.cssText = "width: 325px; height: 125px; position: absolute; left: 225px;top: 0px;";
-	
-	/*DOM_IconApp.src = srcIconApp;
-	DOM_IconApp.style.cssText = styleBanner;
 
-	DOM_IconsMarkets.src = srcIconsMarkets;
-	DOM_IconsMarkets.style.cssText = styleBanner;*/
 	DOM_mainContainer.appendChild(DOM_Background);
 	DOM_mainContainer.appendChild(DOM_TextSecondSlide);
 	DOM_mainContainer.appendChild(DOM_BtnSecondSlide);
-    DOM_mainContainer.appendChild(DOM_LogoBig);
-	//DOM_mainContainer.appendChild(DOM_IconApp);
-	//DOM_mainContainer.appendChild(DOM_IconsMarkets);
+	DOM_mainContainer.appendChild(DOM_LogoBig);
+
 	startAnime3();
 };
 
 function namePlaceMove() {
-	//count = count + 10;
-
+	
 	start = Date.now(); // запомнить время начала
 
 	timer = setInterval(function () {
@@ -365,10 +341,10 @@ function namePlaceMove() {
 		if ((15 - timePassedGo) < 1) endSlideTwo();
 		if ((15 - timePassedGo) < 1) clearInterval(timer);
 		if (DOM_Bubble1.offsetLeft <= 400 && !passBubble1) PauseSlide2();
-		if (DOM_Bubble1.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble1);
-		if (DOM_Bubble2.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble2);
-		if (DOM_Bubble3.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble3);
-		if (DOM_Bubble4.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble4);
+		if (DOM_Bubble1.offsetLeft <= -90) DOM_mainContainer.removeChild(DOM_Bubble1);
+		if (DOM_Bubble2.offsetLeft <= -90) DOM_mainContainer.removeChild(DOM_Bubble2);
+		if (DOM_Bubble3.offsetLeft <= -90) DOM_mainContainer.removeChild(DOM_Bubble3);
+		if (DOM_Bubble4.offsetLeft <= -90) DOM_mainContainer.removeChild(DOM_Bubble4);
 	}, 20);
 }
 //Step by step run app
@@ -386,8 +362,8 @@ var DOM_IconApp_Position = {
 	posY: -500,
 	speedY: 10,
 	update: function () {
-		DOM_LogoRastishka.style.top = this.posY + "px";
-		DOM_LogoRastishka.style.opacity = this.opacity;
+		DOM_Icon.style.top = this.posY + "px";
+		DOM_Icon.style.opacity = this.opacity;
 	}
 };
 
@@ -467,7 +443,7 @@ function tick3() {
 //startSlideThree();
 //startAnime3();
 
-startAnime();
+/*startAnime();
 
 admixAPI.on('load', function () {
 	admixAPI.init({
@@ -483,10 +459,10 @@ admixAPI.on('load', function () {
 		return document.getElementById(id);
 	}
 
-	DOM_BtnSecondSlide.onclick = function(){
+	DOM_BtnSecondSlide.onclick = function () {
 		admixAPI.click('https://rastishka.ar.team/app/');
 	};
-	/*document.body.onselectstart = function() {
+	document.body.onselectstart = function() {
 		return false;
-	}*/
-});
+	}
+});*/
