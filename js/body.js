@@ -30,10 +30,10 @@ var styleMessage = "position: inherit; opacity: 0; animation: hide 1s linear;";
 
 
 //Conten slide 1
-var srcBackground = "images/bgall80.jpg";
-var srcTextFirstSlide = "images/slide-1-text.png";
-var srcLogoRastishka = "images/logo-rastishka.png";
-var srcLogoRastishka2 = "images/logo-rastishka.png";
+var srcBackground = "images/bg-1.png";
+var srcTextFirstSlide = "images/new-game.png";
+var srcLogoRastishka = "images/icons.png";
+var srcLogoRastishka2 = "images/logo-big.png";
 //var srcIconApp = "images/icon-app.png";
 //var srcIconsMarkets = "images/icon-stores.png";
 
@@ -180,7 +180,7 @@ function startSlideOne() {
 	DOM_mainContainer.appendChild(DOM_Background);
 	DOM_mainContainer.appendChild(DOM_TextFirstSlide);
 	DOM_mainContainer.appendChild(DOM_LogoRastishka);
-	//DOM_mainContainer.appendChild(DOM_IconApp);
+	DOM_mainContainer.appendChild(DOM_LogoRastishka2);
 	//DOM_mainContainer.appendChild(DOM_IconsMarkets);
 
 	startTimerslideOne = setTimeout(endSlideOne, 3000);
