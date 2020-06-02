@@ -35,7 +35,8 @@ var styleMessage = "position: inherit; opacity: 0; animation: hide 1s linear;";
 var styleLogoSlide3 = "position: absolute; top: -50px;";
 
 //Conten slide 1
-var srcBackground = "images/bg-1.png";
+var srcBackground = "images/Banner-vertical.png";
+var srcBackground2 = "images/top-right.png";
 var srcTextNewGame = "images/text-new-game.png";
 var srcLogoRastishka = "images/icon.png";
 var srcLogoBig = "images/logo-big.png";
@@ -46,6 +47,7 @@ var srcBtnThirdSlide = "images/button-slide-3.png";
 var srcLogoSmall = "images/logo-small.png";
 
 var DOM_Background = document.createElement("img");
+var DOM_Background2 = document.createElement("img");
 var DOM_TextNewGame = document.createElement("img");
 var DOM_TextSecondSlide = document.createElement("img");
 var DOM_BtnSecondSlide = document.createElement("img");
@@ -168,6 +170,9 @@ function startSlideOne() {
 	DOM_Background.src = srcBackground;
 	DOM_Background.style.cssText = styleBanner;
 
+	DOM_Background2.src = srcBackground2;
+	DOM_Background2.style.cssText = styleBanner;
+
 
 	DOM_TextNewGame.src = srcTextNewGame;
 	DOM_TextNewGame.style.cssText = styleBanner;
@@ -180,6 +185,7 @@ function startSlideOne() {
 	DOM_LogoBig.style.cssText = styleBanner;
 
 	DOM_mainContainer.appendChild(DOM_Background);
+	DOM_mainContainer.appendChild(DOM_Background2);
 	DOM_mainContainer.appendChild(DOM_TextNewGame);
 	DOM_mainContainer.appendChild(DOM_LogoRastishka);
 	DOM_mainContainer.appendChild(DOM_LogoBig);
@@ -348,6 +354,9 @@ function startSlideThree() {
 	DOM_Background.src = srcBackground;
 	DOM_Background.style.cssText = styleBanner;
 
+	DOM_Background2.src = srcBackground2;
+	DOM_Background2.style.cssText = styleBanner;
+
 	DOM_TextSecondSlide.src = srcTextThirdSlide;
 	DOM_TextSecondSlide.style.cssText = styleBanner;
 
@@ -361,6 +370,7 @@ function startSlideThree() {
 	DOM_LogoRastishkaSlide3.style.cssText = styleLogoSlide3;
 
 	DOM_mainContainer.appendChild(DOM_Background);
+	DOM_mainContainer.appendChild(DOM_Background2);
 	DOM_mainContainer.appendChild(DOM_TextSecondSlide);
 	DOM_mainContainer.appendChild(DOM_BtnSecondSlide);
 	DOM_mainContainer.appendChild(DOM_LogoSmall);
