@@ -12,8 +12,8 @@ var passBubble1 = false;
 //Styles
 var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
 
-var styleDino = "position: absolute;";
-var styleDinoStop = "position: absolute;";
+var styleDino = "position: absolute; width: 130px; position: absolute; left: 109px; top: 238px;";
+var styleDinoStop = "position: absolute; left: 0px; top: -20px; visibility: hidden;";
 
 var styleCounterMeter = "width: 115px; position: absolute; left: 20px; top: 0px;";
 var styleCounterEnergy = "width: 115px; position: absolute; left: 165px; top: 0px;";
@@ -59,7 +59,7 @@ var startTimerslideOne;
 
 
 //Content slide 2
-var srcDino = "images/dino.png";
+var srcDino = "images/Dino_1.gif";
 var srcDinoStop = "images/dino.png";
 var DOM_Dino = document.createElement("img");
 var DOM_Dino_Stop = document.createElement("img");
@@ -260,8 +260,8 @@ function PauseSlide2() {
 	DOM_Bubble2.style.animationPlayState = "paused";
 	DOM_Bubble3.style.animationPlayState = "paused";
 	DOM_Bubble4.style.animationPlayState = "paused";
-	DOM_Dino.style.cssText = "position: absolute;";
-	DOM_Dino_Stop.style.cssText = "position: absolute;";
+	DOM_Dino.style.cssText = "visibility: hidden;";
+	DOM_Dino_Stop.style.cssText = "position: absolute; left: 0px; top: -20px; visibility: visible;";
 	clearInterval(timer);
 	DOM_Bubble1.addEventListener("mousedown", () => { continuationSlide2(); });
 	DOM_cursor.addEventListener("mousedown", () => { continuationSlide2(); });
@@ -292,8 +292,8 @@ function continuationSlide2() {
 	DOM_Bubble2.style.animationPlayState = "running";
 	DOM_Bubble3.style.animationPlayState = "running";
 	DOM_Bubble4.style.animationPlayState = "running";
-	DOM_Dino.style.cssText = " position: absolute;";
-	DOM_Dino_Stop.style.cssText = "position: absolute;";
+	DOM_Dino.style.cssText = styleDino;
+	DOM_Dino_Stop.style.cssText = "visibility: hidden;";
 
 	DOM_Bubble2.addEventListener("mousedown", () => {
 		DOM_Bubble2.style.backgroundImage = "none";
