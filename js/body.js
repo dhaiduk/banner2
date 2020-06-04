@@ -1,38 +1,45 @@
+
+window.addEventListener("resize", resizeGame);
+
 var count;
 var timer;
 //Get main container banner
 var DOM_mainContainer = document.getElementById("container");
-var WIDTH_MAIN = DOM_mainContainer.offsetWidth;
-var HEIGHT_MAIN = DOM_mainContainer.offsetHeight;
+var WIDTH_APP = resizeGame().width;
+var HEIGHT_APP = resizeGame().height;
+DOM_mainContainer.style.width = WIDTH_APP+'px';
+DOM_mainContainer.style.height = HEIGHT_APP + "px";
+var WIDTH_MAIN = 320;
+var HEIGHT_MAIN = 480;
 var timePassedBufer = 0, timePassedGoBufer = 0;
 var timePassed, timePassedGO;
 var start;
 var passBubble1 = false;
 
 //Styles
-var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
+var styleBanner = "position: inherit; width: 100%; height: 100%;";
 
-var styleDino = "position: absolute; width: 130px; position: absolute; left: 109px; top: 238px;";
-var styleDinoStop = "position: absolute; left: 0px; top: -20px; visibility: hidden;";
+var styleDino = "position: inherit; width: 130px; position: inherit; left: 109px; top: 238px;";
+var styleDinoStop = "position: inherit; left: 0px; top: -20px; visibility: hidden;";
 
-var styleCounterMeter = "width: 115px; position: absolute; left: 20px; top: 0px;";
-var styleCounterEnergy = "width: 115px; position: absolute; left: 165px; top: 0px;";
-var styleCounterMeterImg = "width: 115px; position: absolute; left: 5px; top: 5px;";
-var styleCounterEnergyImg = "width: 115px; position: absolute; left: 180px; top: 5px;";
-var styleCounterEnergyFull = "width: 80px; height:51px; position: absolute; left: 180px; top: 5px; overflow: hidden;";
-var styleCounterEnergyImgFull = "width: 115px; margin: 0px 0px 0px 0px; position: absolute; left: 0px; top: 0px;";
+var styleCounterMeter = "width: 115px; position: inherit; left: 20px; top: 0px;";
+var styleCounterEnergy = "width: 115px; position: inherit; left: 165px; top: 0px;";
+var styleCounterMeterImg = "width: 115px; position: inherit; left: 5px; top: 5px;";
+var styleCounterEnergyImg = "width: 115px; position: inherit; left: 180px; top: 5px;";
+var styleCounterEnergyFull = "width: 80px; height:51px; position: inherit; left: 180px; top: 5px; overflow: hidden;";
+var styleCounterEnergyImgFull = "width: 115px; margin: 0px 0px 0px 0px; position: inherit; left: 0px; top: 0px;";
 
-var styleGameTableMeters = "width: 70px; position: absolute; top: 70%;";
-var styleBubble1 = "position: absolute; left: 5%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px 0px; width: 125px; height: 125px;  animation: animatedBubble1 5s linear;";
-var styleBubble2 = "position: absolute; left: 50%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px 0px; width: 125px; height: 125px; animation: animatedBubble2 7s linear ;";
-var styleBubble3 = "position: absolute; left: 20%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px -125px; width: 125px; height: 125px; animation: animatedBubble3 10s linear ;";
-var styleBubble4 = "position: absolute; left: 60%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px -125px; width: 125px; height: 125px; animation: animatedBubble4 12s linear ;";
-var styleCursor = "position: absolute; left:  16%;; top: 190px; overflow: hidden; opacity: 1; -webkit-animation: pulsing 2s infinite;  animation: pulsing 2s infinite;";
-var styleCursorPress = "position: absolute; left:  16%;; top: 190px; overflow: hidden; opacity: 1; -webkit-animation: pulsing2 2s infinite;  animation: pulsing2 2s infinite;";
-var styleCursorText = "position: absolute; left:  6%;; top: 110px; overflow: hidden; opacity: 1; -webkit-animation: pulsing2 2s infinite;  animation: pulsing2 2s infinite;";
+var styleGameTableMeters = "width: 70px; position: inherit; top: 70%;";
+var styleBubble1 = "position: inherit; left: 5%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px 0px; width: 125px; height: 125px;  animation: animatedBubble1 5s linear;";
+var styleBubble2 = "position: inherit; left: 50%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px 0px; width: 125px; height: 125px; animation: animatedBubble2 7s linear ;";
+var styleBubble3 = "position: inherit; left: 20%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px -125px; width: 125px; height: 125px; animation: animatedBubble3 10s linear ;";
+var styleBubble4 = "position: inherit; left: 60%; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px -125px; width: 125px; height: 125px; animation: animatedBubble4 12s linear ;";
+var styleCursor = "position: inherit; left:  16%;; top: 190px; overflow: hidden; opacity: 1; -webkit-animation: pulsing 2s infinite;  animation: pulsing 2s infinite;";
+var styleCursorPress = "position: inherit; left:  16%;; top: 190px; overflow: hidden; opacity: 1; -webkit-animation: pulsing2 2s infinite;  animation: pulsing2 2s infinite;";
+var styleCursorText = "position: inherit; left:  6%;; top: 110px; overflow: hidden; opacity: 1; -webkit-animation: pulsing2 2s infinite;  animation: pulsing2 2s infinite;";
 var styleMessage = "position: inherit; opacity: 0; animation: hide 1s linear;";
 
-var styleLogoSlide3 = "position: absolute; top: -50px;";
+var styleLogoSlide3 = "position: inherit; top: -50px;";
 
 //Conten slide 1
 var srcBackground = "images/Banner-vertical.png";
@@ -57,7 +64,6 @@ var DOM_LogoBig = document.createElement("img");
 var DOM_LogoSmall = document.createElement("img");
 var DOM_IconApp = document.createElement("img");
 var DOM_IconsMarkets = document.createElement("img");
-var startTimerslideOne;
 
 
 //Content slide 2
@@ -166,7 +172,7 @@ DOM_cursor_text.style.cssText = styleCursorText;
 
 //Start Slide One------------------------------------------------------------
 function startSlideOne() {
-
+	getWindowClientSize();
 	DOM_Background.src = srcBackground;
 	DOM_Background.style.cssText = styleBanner;
 
@@ -237,7 +243,7 @@ function initGameSlide2() {
 		timePassedGo = timePassedGoBufer + (1.5 * (Date.now() - start) / 1000);
 		DOM_GameMetersCount.innerText = timePassed + "m";
 		DOM_GameEnergyCount.innerText = Math.round((15 - timePassedGo) * 6) + "%";
-		DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((15 - timePassedGo) * 6 / 100)) + "px; height:51px; position: absolute; left: 180px; top: 5px; overflow: hidden;";
+		DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((15 - timePassedGo) * 6 / 100)) + "px; height:51px; position: inherit; left: 180px; top: 5px; overflow: hidden;";
 		// Условие, если проценты меньше 0 то показываем финишный слайд.
 		//DOM_GameMetersCount.innerText = "150m";
 		if ((15 - timePassedGo) < 1) endSlideTwo();
@@ -267,7 +273,7 @@ function PauseSlide2() {
 	DOM_Bubble3.style.animationPlayState = "paused";
 	DOM_Bubble4.style.animationPlayState = "paused";
 	DOM_Dino.style.cssText = "visibility: hidden;";
-	DOM_Dino_Stop.style.cssText = "position: absolute; left: 0px; top: -20px; visibility: visible;";
+	DOM_Dino_Stop.style.cssText = "position: inherit; left: 0px; top: -20px; visibility: visible;";
 	clearInterval(timer);
 	DOM_Bubble1.addEventListener("mousedown", () => { continuationSlide2(); });
 	DOM_cursor.addEventListener("mousedown", () => { continuationSlide2(); });
@@ -474,6 +480,52 @@ function tick3() {
 
 	RAF(tick3);
 }
+
+function resizeGame() {
+	var newWidth, newHeight;
+	var HeightToWidth = 1.5;
+	var mainWidth = getWindowClientSize().width;
+	var mainHeight = getWindowClientSize().height;
+	var newHeightToWidth = mainHeight /mainWidth;
+	console.log(newHeightToWidth);
+
+	if (newHeightToWidth >= HeightToWidth) {
+		newWidth = mainWidth;
+		newHeight = mainWidth * HeightToWidth;
+	} else if (newHeightToWidth < HeightToWidth) {
+		newWidth = mainHeight / HeightToWidth;
+		newHeight = mainHeight;
+	}
+	DOM_mainContainer.style.width = newWidth+'px';
+	DOM_mainContainer.style.height = newHeight + "px";
+	
+	console.log(mainWidth + "/" + mainHeight)
+	console.log(newWidth + "/" + newHeight)
+	return { width: newWidth, height: newHeight };
+}
+
+// возвращает размер клиентской области окна
+function getWindowClientSize() {
+	var uaB = navigator.userAgent.toLowerCase();
+	var isOperaB = (uaB.indexOf('opera') > -1);
+	var isIEB = (!isOperaB && uaB.indexOf('msie') > -1);
+
+	var clientWidth = ((document.compatMode || isIEB) && !isOperaB) ?
+		(document.compatMode == 'CSS1Compat') ?
+			document.documentElement.clientWidth :
+			document.body.clientWidth :
+		(document.parentWindow || document.defaultView).innerWidth;
+
+	var clientHeight = ((document.compatMode || isIEB) && !isOperaB) ?
+		(document.compatMode == 'CSS1Compat') ?
+			document.documentElement.clientHeight :
+			document.body.clientHeight :
+		(document.parentWindow || document.defaultView).innerHeight;
+	//console.log(clientWidth + "/" + clientHeight)
+	return { width: clientWidth, height: clientHeight };
+}
+
+
 
 //startSlideThree();
 //startAnime3();

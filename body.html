@@ -272,14 +272,23 @@ html,
         opacity: 1;
       }
     }
-
+    #animation_container {
+	position:absolute;
+	margin:auto;
+	left:0;right:0;
+	top:0;bottom:0;
+  }
   </style>
 
   <!--
 YOUR CODE IS HERE
 -->
-  <div id="container" style="position: absolute; left: 0; top: 0; width: 320px; height: 480px; overflow: hidden;">
+
+<div id="animation_container" style="width:100%; height:100%">
+  <div id="container" style="position: absolute; display: block; border: 4px solid black;">
   </div>
+</div>
+
   <script type="text/javascript" src="js/body.js"></script>
   <!--
 END OF YOUR CODE 
